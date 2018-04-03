@@ -19,6 +19,7 @@ public class WeatherDataService extends Service {
     private boolean started = false;
     private final IBinder binder = new WeatherDataServiceBinder();
     private List<CityWeatherData> cityWeatherData;
+    private CityWeatherData myCity;
 
 
     public List<CityWeatherData> getCityWeatherData(){
@@ -27,7 +28,18 @@ public class WeatherDataService extends Service {
 
     public CityWeatherData getCityWeatherData(String cityName){
 
+
+
         return null; //@TODO Implement functionality
+    }
+
+    public CityWeatherData getMyCity(){
+        return myCity;
+
+    }
+
+    public void setMyCity(String cityName){
+
     }
 
     @Override
