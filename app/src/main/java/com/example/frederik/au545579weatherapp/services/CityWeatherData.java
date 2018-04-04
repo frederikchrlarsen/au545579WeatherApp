@@ -14,7 +14,7 @@ public class CityWeatherData {
     private int timestamp;
 
 
-    CityWeatherData(String cityNameP, int temperatureP, Drawable iconP, int windP, String descriptionP, int timestampP){
+    CityWeatherData(String cityNameP, int temperatureP, String iconP, int windP, String descriptionP, int timestampP){
 
         setCityName(cityNameP);
         setTemperature(temperatureP);
@@ -42,8 +42,9 @@ public class CityWeatherData {
     public Drawable getWeatherIcon() {
         return icon;
     }
-    public void setWeatherIcon(Drawable iconP){
-        icon = iconP;
+    public void setWeatherIcon(String iconP){
+        //TODO
+        //icon = iconP;
     }
 
     private int getWind(){

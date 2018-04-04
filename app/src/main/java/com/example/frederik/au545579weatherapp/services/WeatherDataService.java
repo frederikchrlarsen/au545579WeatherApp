@@ -7,6 +7,7 @@ import android.os.IBinder;
 import android.util.Log;
 
 import com.example.frederik.au545579weatherapp.Globals;
+import com.example.frederik.au545579weatherapp.models.CityWeather;
 
 import java.util.List;
 
@@ -18,11 +19,11 @@ public class WeatherDataService extends Service {
     private final Globals g = new Globals();
     private boolean started = false;
     private final IBinder binder = new WeatherDataServiceBinder();
-    private List<CityWeatherData> cityWeatherData;
-    private CityWeatherData myCity;
+    private List<CityWeather> cityWeatherData;
+    private CityWeather myCity;
 
 
-    public List<CityWeatherData> getCityWeatherData(){
+    public List<CityWeather> getCityWeatherData(){
         return cityWeatherData; //@TODO Implement functionality
     }
 
@@ -33,7 +34,7 @@ public class WeatherDataService extends Service {
         return null; //@TODO Implement functionality
     }
 
-    public CityWeatherData getMyCity(){
+    public CityWeather getMyCity(){
         return myCity;
 
     }
@@ -45,7 +46,7 @@ public class WeatherDataService extends Service {
     @Override
     public void onCreate() {
 
-        Log.d(g.WEATHER_LOG_TAG, "Started WeatherDataService");
+        Log.d(Globals.WEATHER_LOG_TAG, "Started WeatherDataService");
     }
 
     //https://developer.android.com/reference/android/app/Service.html#onStartCommand(android.content.Intent,%20int,%20int)
@@ -55,14 +56,14 @@ public class WeatherDataService extends Service {
 
             started = true;
         }
-        Log.d(g.WEATHER_LOG_TAG, "WeatherDataService onStartCommand called");
+        Log.d(Globals.WEATHER_LOG_TAG, "WeatherDataService onStartCommand called");
         return START_STICKY;
     }
 
     //https://developer.android.com/reference/android/app/Service.html#onBind(android.content.Intent)
     @Override
     public IBinder onBind(Intent intent) {
-        Log.d(g.WEATHER_LOG_TAG, "WeatherDataService onBind called");
+        Log.d(Globals.WEATHER_LOG_TAG, "WeatherDataService onBind called");
         return binder;
     }
 
@@ -83,6 +84,6 @@ public class WeatherDataService extends Service {
     }
     @Override
     public void onDestroy() {
-        Log.d(g.WEATHER_LOG_TAG, "Stopped WeatherDataService");
+        Log.d(Globals.WEATHER_LOG_TAG, "Stopped WeatherDataService");
     }
 }

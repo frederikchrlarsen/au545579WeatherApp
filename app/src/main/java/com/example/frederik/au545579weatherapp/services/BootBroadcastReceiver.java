@@ -18,7 +18,7 @@ public class BootBroadcastReceiver extends BroadcastReceiver {
         if("android.intent.action.BOOT_COMPLETED".equals(intent.getAction())){
             Intent startWeatherService = new Intent(context, WeatherDataService.class);
             context.startService(startWeatherService);
-            Log.d(g.WEATHER_LOG_TAG, "Started weather service from boot broadcast");
+            Log.d(Globals.WEATHER_LOG_TAG, "Started weather service from boot broadcast");
 
         }
     }
