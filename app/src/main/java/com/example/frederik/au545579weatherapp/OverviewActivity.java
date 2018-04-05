@@ -1,5 +1,9 @@
 package com.example.frederik.au545579weatherapp;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -22,13 +26,13 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.frederik.au545579weatherapp.models.CityWeather;
-import com.example.frederik.au545579weatherapp.services.CityWeatherData;
+import com.example.frederik.au545579weatherapp.models.CityWeatherData;
 import com.example.frederik.au545579weatherapp.services.WeatherDataService;
-import com.example.frederik.au545579weatherapp.Globals;
 import com.example.frederik.au545579weatherapp.utils.FromJsonToCityWeatherData;
 
 import java.util.List;
+
+import static android.app.NotificationManager.IMPORTANCE_LOW;
 
 /**
  * Bound service
@@ -41,6 +45,9 @@ public class OverviewActivity extends AppCompatActivity {
     private WeatherDataService mService;
     private final Globals g = new Globals();
     private List<CityWeatherData> cityWeatherData;
+    private Context context;
+
+
 
     private RequestQueue queue;
 
@@ -48,19 +55,29 @@ public class OverviewActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_overview);
+        context =  getApplicationContext();
 
         Button btnTest  = findViewById(R.id.btnTest);
+        Button btnStop = findViewById(R.id.btnStop);
         Intent intent = new Intent(this, WeatherDataService.class);
-        bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
+        //bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
 
 
 
         btnTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent backgroundServiceIntent = new Intent(OverviewActivity.this, WeatherDataService.class);
+                Intent backgroundServiceIntent = new Intent(context, WeatherDataService.class);
                 startService(backgroundServiceIntent);
-                sendRequest();
+                //sendRequest();
+            }
+        });
+
+        btnStop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent backgroundServiceIntent = new Intent(context, WeatherDataService.class);
+                stopService(backgroundServiceIntent);
             }
         });
     }
@@ -108,9 +125,9 @@ public class OverviewActivity extends AppCompatActivity {
 
                         Log.d(Globals.WEATHER_LOG_TAG, "Volley request successful");
                         Log.d(Globals.WEATHER_LOG_TAG, response);
-                        CityWeather cityWeather = FromJsonToCityWeatherData.parseJsonToCityWeatherData(response);
-                        if(cityWeather != null)
-                            Log.d(Globals.WEATHER_LOG_TAG, "The temp in Aarhus: " + cityWeather.main.temp );
+                        CityWeatherData cityWeatherData = FromJsonToCityWeatherData.parseJsonToCityWeatherData(response);
+                        if(cityWeatherData != null)
+                            Log.d(Globals.WEATHER_LOG_TAG, "The temp in Aarhus: " + cityWeatherData.main.temp );
 
                     }
                 }, new Response.ErrorListener() {
