@@ -203,8 +203,13 @@ public class OverviewActivity extends Activity {
             }
         });
 
-        //Bind to the weather data service and create it if it is not already
+        //Weather data service intent
         final Intent intent = new Intent(this, WeatherDataService.class);
+
+        //Start weather data service
+        startService(intent);
+
+        //Bind to the weather data service and create it if it is not already
         bindService(intent, weatherDataServiceConnection, Context.BIND_AUTO_CREATE);
 
     }
