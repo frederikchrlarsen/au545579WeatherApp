@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">au545579 Weather App</string>
+    <string name="temp">Temp</string>
+    <string name="wind">Wind</string>
+    <string name="description">Description</string>
+    <string name="my_city">My City</string>
+    <string name="edit">Edit</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="new_city_prompt">Enter new city</string>
+    <string name="default_city">Skagen</string>
+    <string name="wrong_city_err">Error getting data for the entered city</string>
+    <string name="stop">STOP</string>
+    <string name="refresh">REFRESH</string>
+    <string name="unable_to_connect">Connection error. Check internet connection</string>
+    <string name="server_error">Unable to connect to weather server</string>
 </resources>

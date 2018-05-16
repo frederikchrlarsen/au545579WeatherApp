@@ -12,10 +12,10 @@ public class Main {
     public Double temp;
     @SerializedName("pressure")
     @Expose
-    public Integer pressure;
+    public Double pressure;
     @SerializedName("humidity")
     @Expose
-    public Integer humidity;
+    public Double humidity;
     @SerializedName("temp_min")
     @Expose
     public Double tempMin;

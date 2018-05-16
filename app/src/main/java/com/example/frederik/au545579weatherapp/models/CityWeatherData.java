@@ -45,4 +45,20 @@ public class CityWeatherData {
     @Expose
     public Integer cod;
 
+    //https://stackoverflow.com/questions/185937/overriding-the-java-equals-method-quirk
+    //Comparing CityWeatherData equality on city name
+    @Override
+    public boolean equals(Object other){
+        if (other == null)
+            return false;
+        if (other == this)
+            return true;
+        if (!(other instanceof CityWeatherData))
+            return false;
+
+
+        CityWeatherData otherCasted = (CityWeatherData)other;
+            return this.name.equals(otherCasted.name);
+    }
+
 }
